@@ -1,5 +1,4 @@
 Farm Name, Geolocation Boundaries, SOC(tonnes/hectare)
-
 Pleasant meadows, {
   "type": "FeatureCollection",
   "features": [

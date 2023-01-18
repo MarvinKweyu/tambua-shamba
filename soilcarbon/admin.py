@@ -18,5 +18,8 @@ class FarmAdmin(admin.ModelAdmin):
 
 @admin.register(SourceFile)
 class SourceFileAdmin(admin.ModelAdmin):
-    list_display = ("title", "csv_file", "created_at")
+    list_display = ("id", "title", "csv_file", "created_at")
+    list_filter = [
+        "created_at",
+    ]
     search_fields = ["title"]

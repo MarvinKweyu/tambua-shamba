@@ -8,7 +8,7 @@ class SourceFileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SourceFile
-        fields = ("id", "title", "csv_file", "created_at", "updated_at")
+        fields = ("id", "csv_file", "created_at", "updated_at")
 
 
 class FarmSerializer(serializers.ModelSerializer):

@@ -1,8 +1,10 @@
 import pandas as pd
 from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 from django.db import models
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
+from django.http import JsonResponse
 from django.utils.text import slugify
 
 from soilcarbon.helpers.model_helpers import validate_is_csv
@@ -13,7 +15,8 @@ class SourceFile(models.Model):
 
     title = models.CharField(max_length=500)
     csv_file = models.FileField(
-        upload_to="field_sources/%Y/%m/%d/", validators=(validate_is_csv,)
+        upload_to="field_sources/%Y/%m/%d/",
+        validators=[FileExtensionValidator(allowed_extensions=["csv"])],
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
@@ -24,8 +27,8 @@ class SourceFile(models.Model):
     def save(self, *args, **kwargs):
         """Use the csv_file name as the title"""
         if not self.title:
-            self.title = slugify(self.title)
-            super().save(*args, **kwargs)
+            self.title = slugify(self.csv_file.name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -36,6 +39,8 @@ def check_file_validity(sender, instance, **kwargs):
     """
     Check if the file has the correct column headers and whether it has content with no null values
     """
+    # Todo: return an error to the API instead of throwing the error page
+    accepted_headers = ["Farm Name", "Geolocation Boundaries", "SOC (tonnes/hectare)"]
     csv_file = instance.csv_file
 
     # Check the file's validity here
@@ -44,7 +49,48 @@ def check_file_validity(sender, instance, **kwargs):
     if df.empty:
         raise ValidationError("This file is empty.")
 
+    all_columns_present = any(
+        [item in accepted_headers for item in df.columns.tolist()]
+    )
+    if not all_columns_present:
+        ValidationError("The file has empty/ null values in its rows")
+        return JsonResponse(
+            {"error": "This file does not have the required column headers."},
+            status=400,
+        )
+
+    if df.isnull().sum().sum() > 0:
+        ValidationError("The file has empty/ null values in its rows")
+        return JsonResponse(
+            {"error": "The file has empty/ null values in its rows"},
+            status=400,
+        )
+
     pre_save.connect(check_file_validity, sender=SourceFile)
+
+
+@receiver(post_save, sender=SourceFile)
+def create_farms(sender, instance, **kwargs):
+    """Add farms or create farm objects that have not been added from previous file uploads."""
+    csv_file = instance.csv_file
+    # Check the file's validity here
+    df = pd.read_csv(csv_file)
+
+    for index, row in df.iterrows():
+        farm = Farm(
+            farm_name=row["Farm Name"],
+            geographical_boundaries=row["Geolocation Boundaries"],
+            soil_organic_carbon=row["SOC (tonnes/hectare)"],
+            source_file=instance,
+        )
+
+        try:
+            farm.save()
+        except:
+            # go to the next row  in the csv since this farm already exists
+            continue
+
+    post_save.connect(create_farms, sender=SourceFile)
 
 
 class Farm(models.Model):
