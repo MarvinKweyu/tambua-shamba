@@ -1,10 +1,11 @@
+import pandas as pd
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.utils.text import slugify
-from soilcarbon.helpers.model_helpers import (
-    file_is_valid,
-    validate_is_csv,
-    create_farms_from_file,
-)
+
+from soilcarbon.helpers.model_helpers import validate_is_csv
 
 
 class SourceFile(models.Model):
@@ -22,16 +23,28 @@ class SourceFile(models.Model):
 
     def save(self, *args, **kwargs):
         """Use the csv_file name as the title"""
-        if file_is_valid(self.csv_file):
-            if not self.title:
-                self.title = slugify(self.title)
-                super().save(*args, **kwargs)
-                # add farms or create farm objects that have not been added from previous file uploads
-                # ? background task
-                # create_farms_from_file(self.title)
+        if not self.title:
+            self.title = slugify(self.title)
+            super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
+
+
+@receiver(pre_save, sender=SourceFile)
+def check_file_validity(sender, instance, **kwargs):
+    """
+    Check if the file has the correct column headers and whether it has content with no null values
+    """
+    csv_file = instance.csv_file
+
+    # Check the file's validity here
+    df = pd.read_csv(csv_file)
+    # ensure there is content in this file
+    if df.empty:
+        raise ValidationError("This file is empty.")
+
+    pre_save.connect(check_file_validity, sender=SourceFile)
 
 
 class Farm(models.Model):
@@ -43,7 +56,7 @@ class Farm(models.Model):
     source_file = models.ForeignKey(
         SourceFile, related_name="farms", on_delete=models.CASCADE
     )
-    location_boundary = models.CharField(max_length=500)
+    geographical_boundaries = models.CharField(max_length=500)
     soil_organic_carbon = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
