@@ -29,6 +29,7 @@ DATABASES = {
 
 
 ALLOWED_HOSTS = ["*"]
+CORS_ALLOW_ALL_ORIGINS = True
 
 # display mail on console
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

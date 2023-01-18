@@ -8,7 +8,7 @@ class SourceFileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SourceFile
-        fields = ("id", "csv_file", "created_at", "updated_at")
+        fields = ("id", "title", "csv_file", "created_at", "updated_at")
 
 
 class FarmSerializer(serializers.ModelSerializer):
@@ -22,6 +22,7 @@ class FarmSerializer(serializers.ModelSerializer):
             "id",
             "farm_name",
             "soil_organic_carbon",
+            "source_file",
             "geographical_boundaries",
             "created_at",
             "updated_at",
