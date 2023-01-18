@@ -1,5 +1,13 @@
 from rest_framework import serializers
-from soilcarbon.models import Farm
+from soilcarbon.models import SourceFile, Farm
+
+
+class SourceFileSerializer(serializers.ModelSerializer):
+    """ """
+
+    class Meta:
+        model = SourceFile
+        fields = ("id", "csv_file", "created_at", "updated_at")
 
 
 class FarmSerializer(serializers.ModelSerializer):
@@ -15,4 +23,5 @@ class FarmSerializer(serializers.ModelSerializer):
             "soil_organic_carbon",
             "location_boundary",
             "created_at",
+            "updated_at",
         )

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from soilcarbon.models import Farm
+from soilcarbon.models import Farm, SourceFile
 
 
 @admin.register(Farm)
@@ -14,3 +14,9 @@ class FarmAdmin(admin.ModelAdmin):
         "created_at",
     ]
     search_fields = ["farm_name", "soil_organic_carbon"]
+
+
+@admin.register(SourceFile)
+class SourceFileAdmin(admin.ModelAdmin):
+    list_display = ("title", "csv_file", "created_at")
+    search_fields = ["title"]

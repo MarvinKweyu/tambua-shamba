@@ -29,6 +29,10 @@ INSTALLED_APPS = [
     # local apps
     "soilcarbon",
     "api",
+    # 3rd party
+    "rest_framework",
+    "django_filters",
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [

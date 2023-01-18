@@ -6,7 +6,8 @@ router = SimpleRouter()
 
 app_name = "soilcarbon"
 
-router.register("", views.CarbonViewSet, basename="carbon")
+router.register("farms", views.FarmViewSet, basename="farms")
+router.register("sources", views.SourceFileViewSet, basename="source_file")
 
 urlpatterns = []
 
