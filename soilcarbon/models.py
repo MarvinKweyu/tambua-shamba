@@ -1,7 +1,9 @@
 import pandas as pd
+from django.contrib.gis.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
-from django.db import models
+
+# from django.db import models
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.http import JsonResponse
@@ -102,7 +104,7 @@ class Farm(models.Model):
     source_file = models.ForeignKey(
         SourceFile, related_name="farms", on_delete=models.CASCADE
     )
-    geographical_boundaries = models.CharField(max_length=500)
+    geographical_boundaries = models.PolygonField()
     soil_organic_carbon = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)

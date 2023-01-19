@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.gis",
     # local apps
     "soilcarbon",
     "api",
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_yasg",
     "corsheaders",
+    "rest_framework_gis",
 ]
 
 MIDDLEWARE = [
@@ -105,9 +107,9 @@ USE_TZ = True
 STATIC_URL = "static/"
 # look for static files in this directory and move them to static root directory
 # used during collect static
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static_cdn"),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static_cdn"),
+# ]
 
 # store static in this directory
 STATIC_ROOT = os.path.join(BASE_DIR, "static")

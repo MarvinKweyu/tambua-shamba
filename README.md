@@ -9,7 +9,8 @@
   - [Table of Contents](#table-of-contents)
   - [Running GrowEverything Locally](#running-groweverything-locally)
     - [Manual Setup](#manual-setup)
-    - [Docker Setup](#docker-setup)
+    - [Docker Setup(WIP)](#docker-setupwip)
+  - [Production Day](#production-day)
   - [Project path and improvements](#project-path-and-improvements)
 
 
@@ -29,7 +30,24 @@ Run the server
 ```bash
 python3 manage.py runserver
 ```
-### Docker Setup
+### Docker Setup(WIP)
 With docker installed on your host machine, perform the following operations.
+Ensure you have both docker and docker -compose installed
 
+Clone the application, navigate to the root directory, build the image, run it in detached mode and run migrations
+
+```bash
+
+docker-compose up -d --build
+docker-compose exec web python3 manage.py migrate --settings=grow_everything.settings.dev --noinput
+
+```
+
+## Production Day
+
+With dockers
 ## Project path and improvements
+
+- Intergration of asynchronous tasks
+  * Update farms from the CSV asynchronously. Use celery and rabbitMQ for this.
+  * 

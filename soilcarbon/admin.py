@@ -1,9 +1,10 @@
 from django.contrib import admin
+from django.contrib.gis.admin import OSMGeoAdmin
 from soilcarbon.models import Farm, SourceFile
 
 
 @admin.register(Farm)
-class FarmAdmin(admin.ModelAdmin):
+class FarmAdmin(OSMGeoAdmin):
     list_display = (
         "id",
         "farm_name",
