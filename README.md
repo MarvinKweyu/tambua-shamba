@@ -4,6 +4,8 @@
 
 
 ## Table of Contents
+- [Grow Everything](#grow-everything)
+  - [Table of Contents](#table-of-contents)
   - [Running GrowEverything Locally](#running-groweverything-locally)
     - [Manual Setup](#manual-setup)
     - [Docker Setup(WIP)](#docker-setupwip)
@@ -41,7 +43,7 @@ Access the project documentation on your local machine on **http://127.0.0.1:800
   - Docker
   - Docker-compose
 
-To run the project
+To run the project, navigate to the root and run the below:
 ```bash
 docker-compose up -d --build
 ```

@@ -1,5 +1,5 @@
-from rest_framework import serializers
 from django.contrib.gis.db import models as gis_models
+from rest_framework import serializers
 
 from soilcarbon.models import Farm, SourceFile
 
@@ -26,7 +26,6 @@ class SourceFileSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
 
         farm_count = Farm.objects.filter(source_file=data["id"]).count()
-        # file_name = data["title"]
 
         data["farm_count"] = farm_count
 
