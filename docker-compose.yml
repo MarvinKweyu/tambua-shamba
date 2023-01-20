@@ -3,7 +3,7 @@ version: "3.7"
 services:
   web:
     build: .
-    command: python manage.py runserver --settings=grow_everything.config.dev 0.0.0.0:8000
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
     ports:
@@ -14,7 +14,7 @@ services:
       - proxynet
 
   db:
-    image: postgres:12.0-alpine
+    image: kartoza/postgis:12.0
     networks:
       - proxynet
     volumes:
@@ -23,6 +23,7 @@ services:
       - POSTGRES_USER=soilcarbon
       - POSTGRES_PASSWORD=soilcarbon
       - POSTGRES_DB=soilcarbon
+    restart: "on-failure"
 
 networks:
   proxynet:

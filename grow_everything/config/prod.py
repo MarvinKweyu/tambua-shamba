@@ -5,7 +5,7 @@ from pathlib import Path
 
 from grow_everything.config.base import *
 
-DEBUG = True
+DEBUG = False
 
 SECRET_KEY = os.getenv(
     "SECRET_KEY", "django-insecure-pz800nay^^4r7=kjtyca-7&ddgp%9x)f1rj1o1%7-g-(hug%30"
@@ -22,13 +22,9 @@ DATABASES = {
     }
 }
 
-#  allow every access in local development
-CORS_ALLOW_ALL_ORIGINS = True
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# change this according to your domain
+CORS_ALLOW_ALL_ORIGINS = True
 ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
-
-# display mail on console
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
