@@ -1,5 +1,4 @@
 import pandas as pd
-import magic
 from django.contrib.gis import geos
 from django.contrib.gis.geos import GEOSGeometry, fromstr
 from django.db.utils import IntegrityError
@@ -39,8 +38,16 @@ class SourceFileViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             # before you save this file, check that the fields are valid
             pre_saved_file = serializer.validated_data["csv_file"]
+            df = None
 
-            df = pd.read_csv(pre_saved_file)
+            try:
+                df = pd.read_csv(pre_saved_file)
+            except:
+                return JsonResponse(
+                    {"error": "This file might not be a CSV file"},
+                    status=400,
+                )
+
             # ensure there is content in this file
             if df.empty:
                 return JsonResponse(
@@ -48,8 +55,6 @@ class SourceFileViewSet(viewsets.ModelViewSet):
                     status=400,
                 )
 
-            print(f"{df.head()} are the columns \n")
-            print(f"{accepted_headers} are accepted\n\n")
             all_columns_present = any(
                 [item in accepted_headers for item in df.columns.tolist()]
             )

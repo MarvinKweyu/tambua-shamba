@@ -8,7 +8,7 @@ from grow_everything.config.base import *
 DEBUG = False
 
 SECRET_KEY = os.getenv(
-    "SECRET_KEY", "django-insecure-pz800nay^^4r7=kjtyca-7&ddgp%9x)f1rj1o1%7-g-(hug%30"
+    "SECRET_KEY", "a^(6eqi@if&6lyt0h1od^o450!8h8@s0*x_rf9(bx(3fiuhj*6"
 )
 
 DATABASES = {

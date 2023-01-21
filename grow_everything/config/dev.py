@@ -8,16 +8,16 @@ from grow_everything.config.base import *
 DEBUG = True
 
 SECRET_KEY = os.getenv(
-    "SECRET_KEY", "django-insecure-pz800nay^^4r7=kjtyca-7&ddgp%9x)f1rj1o1%7-g-(hug%30"
+    "SECRET_KEY", "a^(6eqi@if&6lyt0h1od^o450!8h8@s0*x_rf9(bx(3fiuhj*6"
 )
 
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": os.environ.get("DATABASE_NAME", "soilcarbon"),
-        "USER": os.environ.get("DATABASE_USER", "marvin"),
-        "PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
-        "HOST": os.environ.get("DATABASE_HOST", "localhost"),
+        "USER": os.environ.get("DATABASE_USER", "soilcarbon"),
+        "PASSWORD": os.environ.get("DATABASE_PASSWORD", "soilcarbon"),
+        "HOST": os.environ.get("DATABASE_HOST", "db"),
         "PORT": os.environ.get("DATABASE_PORT", "5432"),
     }
 }
