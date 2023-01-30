@@ -13,7 +13,7 @@ from drf_yasg import openapi
 
 API_TITLE = "The GrowEverything SoilCarbon API"
 API_DESCRIPTION = (
-    "Read book suggestions and summaries.Buy a book based on recommendation"
+    "The Soil carbon content across farms in Kenya"
 )
 
 schema_view = get_schema_view(
