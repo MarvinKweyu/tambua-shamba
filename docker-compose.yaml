@@ -1,5 +1,6 @@
 services:
   backend-server:
+    container_name: grow_everything_server
     build:
       context: ./groweverythingserver
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
@@ -16,6 +17,7 @@ services:
       - database
 
   database:
+    container_name: grow_everything_database
     image: kartoza/postgis:12.0
     networks:
       - proxynet
@@ -28,17 +30,19 @@ services:
     restart: "on-failure"
   
   frontend-server:
+    container_name: grow_everything_client
     build: 
       context: ./groweverythingclient
-    command: bash -c "npm run start"
     volumes:
       - .:/frontend-server
+      - /frontend-server/node_modules
     ports:
-      - 4200:4200
+      - 4200:80
     env_file:
       - ./.env.dev
     networks:
       - proxynet
+    restart: "on-failure"
     depends_on:
       - backend-server
 

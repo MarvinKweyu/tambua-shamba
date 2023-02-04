@@ -4,9 +4,15 @@ WORKDIR /frontend-server
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN npm run build --prod
+
+EXPOSE 80
+
+CMD ["npm", "start"]
+
+
+# RUN npm run build --prod
 
 # EXPOSE 80
 # use nginx to serve the static files
-FROM nginx:alpine
-COPY --from=nodejs /frontend-server/dist/soil-carbon usr/share/nginx/html
+# FROM nginx:alpine
+# COPY --from=nodejs /frontend-server/dist/soil-carbon usr/share/nginx/html
