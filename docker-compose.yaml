@@ -11,6 +11,7 @@ services:
       - ./.env.dev
     networks:
       - proxynet
+    restart: "on-failure"
     depends_on:
       - database
 

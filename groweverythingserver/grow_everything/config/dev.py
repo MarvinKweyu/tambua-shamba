@@ -17,7 +17,7 @@ DATABASES = {
         "NAME": os.environ.get("DATABASE_NAME", "soilcarbon"),
         "USER": os.environ.get("DATABASE_USER", "soilcarbon"),
         "PASSWORD": os.environ.get("DATABASE_PASSWORD", "soilcarbon"),
-        "HOST": os.environ.get("DATABASE_HOST", "db"),
+        "HOST": os.environ.get("DATABASE_HOST", "database12345555"),
         "PORT": os.environ.get("DATABASE_PORT", "5432"),
     }
 }
