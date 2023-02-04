@@ -4,7 +4,7 @@ LABEL maintainer="hello@marvinkweyu.net"
 LABEL description="Grow Everything product for soil carbon mapping in Kenya"
 
 #  working directory for docker instructions
-WORKDIR /app
+WORKDIR /backend-server
 
 #  set environment variables
 ENV PYTHONUNBUFFERED=1  WEB_CONCURRENCY=3
@@ -29,4 +29,4 @@ COPY ./entrypoint.sh .
 COPY . .
 
 # run entrypoint.sh
-ENTRYPOINT [ "/app/entrypoint.sh" ]
+ENTRYPOINT [ "/backend-server/entrypoint.sh" ]

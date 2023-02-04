@@ -5,7 +5,7 @@
 # pull officail base image
 FROM python:3.10-slim-buster as builder
 
-WORKDIR /app
+WORKDIR /backend-server
 
 # environment variables
 # prevent python writing pyc to disc
@@ -28,7 +28,7 @@ COPY . .
 
 # install dependencies
 COPY ./requirements.txt .
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.txt
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /backend-server/wheels -r requirements.txt
 
 
 
@@ -39,14 +39,14 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.t
 FROM python:3.10-slim-buster
 
 #  create directory for app user
-RUN mkdir -p /home/app
+RUN mkdir -p /home//backend-server
 
 # create app user
 RUN addgroup -S app && adduser -S app -G app
 
 # create appropriate directories
 # ENV HOME=/home/app
-ENV APP_HOME=/home/app
+ENV APP_HOME=/home/backend-server
 # RUN mkdir $APP_HOME
 RUN mkdir $APP_HOME/staticfiles
 RUN mkdir $APP_HOME/mediafiles
@@ -54,8 +54,8 @@ WORKDIR $APP_HOME
 
 #  install dependencies
 RUN apt-get update && apt-get -y install libpq
-COPY --from=builder /app/wheels /wheels
-COPY --from=builder /app/requirements.txt .
+COPY --from=builder /backend-server/wheels /wheels
+COPY --from=builder /backend-server/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
 # copy entrypoint prod.sh

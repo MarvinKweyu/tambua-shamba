@@ -1,0 +1,49 @@
+services:
+  backend-server:
+    build:
+      context: ./groweverythingserver
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/backend-server
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
+    networks:
+      - proxynet
+    depends_on:
+      - database
+
+  database:
+    image: kartoza/postgis:12.0
+    networks:
+      - proxynet
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=soilcarbon
+      - POSTGRES_PASSWORD=soilcarbon
+      - POSTGRES_DB=soilcarbon
+    restart: "on-failure"
+  
+  frontend-server:
+    build: 
+      context: ./groweverythingclient
+    command: bash -c "npm run start"
+    volumes:
+      - .:/frontend-server
+    ports:
+      - 4200:4200
+    env_file:
+      - ./.env.dev
+    networks:
+      - proxynet
+    depends_on:
+      - backend-server
+
+networks:
+  proxynet:
+    name: groweverything_network
+
+volumes:
+  postgres_data:

@@ -1,19 +1,13 @@
-from django.urls import path, include
-from rest_framework.documentation import include_docs_urls
-
-from drf_spectacular.views import (
-    SpectacularAPIView,
-    SpectacularRedocView,
-    SpectacularSwaggerView,
-)
-
-from drf_yasg.views import get_schema_view
+from django.urls import include, path
+from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
+                                   SpectacularSwaggerView)
 from drf_yasg import openapi
-
+from drf_yasg.views import get_schema_view
+from rest_framework.documentation import include_docs_urls
 
 API_TITLE = "The GrowEverything SoilCarbon API"
 API_DESCRIPTION = (
-    "Read book suggestions and summaries.Buy a book based on recommendation"
+    "A project to collect and preview soil organic carbon performance in farms across Kenya"
 )
 
 schema_view = get_schema_view(
