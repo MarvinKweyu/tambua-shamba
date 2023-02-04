@@ -1,0 +1,9 @@
+<div class="place-center" *ngIf="this.bestFarms.length === 0; else showFarms">
+  <h3>Grow Everything</h3>
+  <p>Please select a file from your local directory to view its farms</p>
+  <button class="btn btn-primary" routerLink="/history">Ok</button>
+</div>
+
+<ng-template #showFarms>
+  <app-mapview [farms]="bestFarms"></app-mapview>
+</ng-template>

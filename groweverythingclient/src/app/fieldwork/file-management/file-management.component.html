@@ -1,0 +1,57 @@
+<div class="card border-1" style="width: 100%">
+  <div class="d-flex justify-content-end">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      fill="currentColor"
+      class="bi bi-x-lg m-1 pointer"
+      title="Close"
+      viewBox="0 0 16 16"
+      mat-button
+      mat-dialog-close
+      (click)="closeDialog()"
+    >
+      <path
+        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+      />
+    </svg>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title text-center">Soil Organic Carbon</h5>
+    <p class="card-text">Upload a CSV file with the collected data</p>
+
+    <div class="mt-3 text-center">
+      <code>
+        <div class="mb-3">
+          <label for="formFile" class="form-label">CSV file</label>
+          <input
+            class="form-control shadow-none"
+            type="file"
+            id="formFile"
+            (change)="uploadFile($event)"
+            accept=".csv"
+          />
+        </div>
+
+        <strong style="font-size: 20px" *ngIf="failedUpload">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-exclamation-diamond red"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"
+            />
+            <path
+              d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"
+            />
+          </svg>
+        </strong>
+      </code>
+    </div>
+  </div>
+</div>
