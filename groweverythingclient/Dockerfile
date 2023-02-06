@@ -1,11 +1,12 @@
 FROM node:16.13.0 AS nodejs
-WORKDIR /frontend-server
+WORKDIR /app
 # Install app dependencies
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
 
 EXPOSE 80
+EXPOSE 4200
 
 CMD ["npm", "start"]
 

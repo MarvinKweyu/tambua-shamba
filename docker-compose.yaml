@@ -1,4 +1,18 @@
 services:
+
+  database:
+    container_name: grow_everything_database
+    image: kartoza/postgis:12.0
+    networks:
+      - proxynet
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=soilcarbon
+      - POSTGRES_PASSWORD=soilcarbon
+      - POSTGRES_DB=soilcarbon
+    restart: "on-failure"
+
   backend-server:
     container_name: grow_everything_server
     build:
@@ -15,19 +29,6 @@ services:
     restart: "on-failure"
     depends_on:
       - database
-
-  database:
-    container_name: grow_everything_database
-    image: kartoza/postgis:12.0
-    networks:
-      - proxynet
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=soilcarbon
-      - POSTGRES_PASSWORD=soilcarbon
-      - POSTGRES_DB=soilcarbon
-    restart: "on-failure"
   
   frontend-server:
     container_name: grow_everything_client
@@ -37,7 +38,7 @@ services:
       - .:/frontend-server
       - /frontend-server/node_modules
     ports:
-      - 4200:80
+      - 4200:4200
     env_file:
       - ./.env.dev
     networks:
