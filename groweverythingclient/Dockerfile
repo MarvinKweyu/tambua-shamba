@@ -2,10 +2,10 @@ FROM node:16.13.0 AS nodejs
 WORKDIR /app
 # Install app dependencies
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install -g @angular/cli @angular-devkit/build-angular && npm install
+# RUN npm install
 COPY . .
 
-EXPOSE 80
 EXPOSE 4200
 
 CMD ["npm", "start"]
