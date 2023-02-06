@@ -6,3 +6,30 @@ body { margin: 0; font-family: 'Poppins', sans-serif; }
 .pointer{
     cursor: pointer;
 }
+
+.theme-color{
+    /* color: #d3ead6; */
+    color: #0d594c;
+}
+
+.theme-btn{
+    background-color: #0d594c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1.2em;
+}
+
+.underline{
+    text-decoration: underline solid #0d594c 20%;
+    padding-top: 4%;
+}
+
+input[type=text]:focus {
+    outline: 2px solid #d3ead6;
+    /* oranges! yey */
+}
+input[type=file]:focus {
+    outline: 2px solid #d3ead6;
+}
