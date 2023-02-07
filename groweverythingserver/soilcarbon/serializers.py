@@ -8,13 +8,13 @@ class SourceFileSerializer(serializers.ModelSerializer):
     """ """
 
     farm_count = serializers.IntegerField(read_only=True)
-    # file_name = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = SourceFile
         fields = (
             "id",
             "title",
+            "file_slug",
             "csv_file",
             "farm_count",
             "created_at",

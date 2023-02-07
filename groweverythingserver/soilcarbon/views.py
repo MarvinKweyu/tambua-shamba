@@ -125,7 +125,7 @@ class FarmViewSet(viewsets.ModelViewSet):
     queryset = Farm.objects.all()
     serializer_class = FarmSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["farm_name"]
+    filterset_fields = ["farm_name", "source_file__title", "source_file__id", "source_file__file_slug"]
 
     @action(detail=False, methods=["get"], url_path="topfarms/(?P<count>\d+)")
     def topfarms(self, request, *args, **kwargs):
