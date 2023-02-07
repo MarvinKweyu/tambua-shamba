@@ -1,6 +1,5 @@
 from django.contrib.gis.db import models as gis_models
 from rest_framework import serializers
-
 from soilcarbon.models import Farm, SourceFile
 
 
@@ -8,19 +7,19 @@ class SourceFileSerializer(serializers.ModelSerializer):
     """ """
 
     farm_count = serializers.IntegerField(read_only=True)
-    # file_name = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = SourceFile
         fields = (
             "id",
             "title",
+            "file_slug",
             "csv_file",
             "farm_count",
             "created_at",
             "updated_at",
         )
-        read_only_fields = ("farm_count", "title")
+        read_only_fields = ("farm_count", "title", "file_slug", ),
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

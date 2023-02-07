@@ -31,27 +31,32 @@ get the top 3 and worst three farms
     this.dashboardService.getBestFarms(3).subscribe((res: any) => {
 
       this.bestFarms = res.results;
-      this.farms = [...this.farms, ...res.results]
+      // add a tag on each to show that it is a best farm
+      this.bestFarms.forEach((farm: Farm) => {
+        farm.isBestFarm = true
+      })
+
+      this.farms = [...this.farms, ...this.bestFarms]
+      
     },
       (error: any) => {
         this.toastr.error(error.error.error, "Unable to fetch best farms at this time")
         return;
       })
+      
+      this.dashboardService.getWorstFarms(3).subscribe((res: any) => {
+        // only add farms that are not already in the best farms list. This is in case the farm array has less than 6 farms
+      this.worstFarms = res.results.filter((item: any) => {
+        return this.farms.indexOf(item) == -1;
+      });
 
-    this.dashboardService.getWorstFarms(3).subscribe((res: any) => {
-      this.worstFarms = res.results;
-      this.farms = [...this.farms, ...res.results]
+      this.farms = [...this.farms, ...this.worstFarms]
     },
 
       (error: any) => {
         this.toastr.error(error.error.error, "Unable to fetch least performing farms at this time")
         return;
       })
-
-    //  in case the dataset is small, we stand the chance of returning the same data for least
-    // and worst farms. remove duplicates in this event
-
-    this.farms = [...new Set(this.farms)]
 
   }
 

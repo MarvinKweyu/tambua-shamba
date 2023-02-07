@@ -15,9 +15,9 @@ DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": os.environ.get("DATABASE_NAME", "soilcarbon"),
-        "USER": os.environ.get("DATABASE_USER", "soilcarbon"),
+        "USER": os.environ.get("DATABASE_USER", "marvin"),
         "PASSWORD": os.environ.get("DATABASE_PASSWORD", "soilcarbon"),
-        "HOST": os.environ.get("DATABASE_HOST", "database12345555"),
+        "HOST": os.environ.get("DATABASE_HOST", "localhost"),
         "PORT": os.environ.get("DATABASE_PORT", "5432"),
     }
 }

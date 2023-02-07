@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-end">
+  <input
+    type="text"
+    class="form-control w-25 border-1 shadow-none"
+    placeholder="Enter a file name to search"
+    aria-label="file_name"
+    aria-describedby="basic-addon1"
+  />
+</div>
+
+<h2 class="text-center">{{ fileDetails.title }}</h2>
+<p class="text-center">
+  Uploaded by John Doe on {{ fileDetails.created_at | date : "mediumDate" }}
+</p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Farm name</th>
+      <th scope="col">Soil carbon content</th>
+      <th scope="col">Date of creation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let farm of farmDetails.results; let number = index">
+      <th scope="row">{{ number + 1 }}</th>
+      <td>{{ farm.farm_name }}</td>
+      <td>{{ farm.soil_organic_carbon }}</td>
+      <td>{{ farm.created_at | date : "medium" }}</td>
+    </tr>
+  </tbody>
+</table>

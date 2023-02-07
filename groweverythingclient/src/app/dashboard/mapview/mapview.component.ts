@@ -41,10 +41,11 @@ export class MapviewComponent implements OnInit, AfterViewInit {
 
     this.farms.forEach(farmItem => {
       const popDetail = L.popup().setContent(`<p> Farm name: ${farmItem.farm_name} <br/> SOC(tonnes/hectare): ${farmItem.soil_organic_carbon}</p>`)
+      const fillcolor = farmItem.isBestFarm ? 'green' : 'red';
 
       let geoJsonFeatures: geojson.FeatureCollection = farmItem.geographical_boundaries;
-
-      L.geoJSON(geoJsonFeatures).bindPopup(popDetail)
+      // fill color based on performance
+      L.geoJSON(geoJsonFeatures).bindPopup(popDetail).setStyle({ fillColor: fillcolor })
         .addTo(this.map);
 
     });

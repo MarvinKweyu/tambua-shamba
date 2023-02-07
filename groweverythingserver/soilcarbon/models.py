@@ -1,7 +1,6 @@
 from django.contrib.gis.db import models
 from django.core.validators import FileExtensionValidator
 from django.utils.text import slugify
-
 from soilcarbon.helpers.model_helpers import validate_is_csv
 
 
@@ -9,6 +8,7 @@ class SourceFile(models.Model):
     """CSV collection info from where field collection happens"""
 
     title = models.CharField(max_length=500)
+    file_slug = models.SlugField(max_length=500, unique=True)
     csv_file = models.FileField(
         upload_to="field_sources/%Y/%m/%d/",
         validators=[FileExtensionValidator(allowed_extensions=["csv"])],
@@ -21,8 +21,9 @@ class SourceFile(models.Model):
 
     def save(self, *args, **kwargs):
         """Use the csv_file name as the title"""
-        if not self.title:
+        if not self.title or not self.slug:
             self.title = slugify(self.csv_file.name)
+            self.file_slug = slugify(self.csv_file.name)
         super().save(*args, **kwargs)
 
     def __str__(self):

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router'
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { FileManagementComponent } from 'src/app/fieldwork/file-management/file-management.component';
@@ -12,9 +13,15 @@ import { SourceFile } from './models/sourceFile.model';
   styleUrls: ['./fieldwork.component.css']
 })
 export class FieldworkComponent {
+
   allFiles: SourceFile[] = [];
 
-  constructor(public dialog: MatDialog, public fieldWorkService: FieldWorkService, private toastr: ToastrService) { }
+  constructor(
+    public dialog: MatDialog,
+    public router: Router,
+    public route: ActivatedRoute,
+    public fieldWorkService: FieldWorkService, 
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getFiles()
@@ -42,6 +49,10 @@ export class FieldworkComponent {
     dialogRef.afterClosed().subscribe(result => {
       this.getFiles()
     });
+  }
+
+  viewFarms(resource: SourceFile) {
+    this.router.navigate([resource.id], { relativeTo: this.route })
   }
 
 }
