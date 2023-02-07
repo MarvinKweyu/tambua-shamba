@@ -20,7 +20,7 @@ To run the project in development mode, run the below at the root:
 docker-compose up 
 ```
 
-Access the client application on: **[127.0.0.1:4200](127.0.0.1:4200)** and the server-side application on **[127.0.0.1:8000/api/v1/redoc](127.0.0.1:8000/api/v1/redoc)**
+Access the client application on: **[127.0.0.1:4200](127.0.0.1:4200)** and the server-side application on **[127.0.0.1:8000/api/v1/docs](127.0.0.1:8000/api/v1/docs)**
 
 **To clean up the system**:
 
