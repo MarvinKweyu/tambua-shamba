@@ -6,6 +6,8 @@
 </p>
 
 
+>For an overview of what this product is about: [marvinkweyu/projects/tambua-shamba](https://www.marvinkweyu.net/projects/tambua_shamba)
+
 - [Local Development](#local-development)
 - [Production environment(WIP)](#production-environmentwip)
 - [Developer notes](#developer-notes)
