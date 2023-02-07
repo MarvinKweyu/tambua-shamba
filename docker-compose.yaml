@@ -1,7 +1,7 @@
 services:
 
   database:
-    container_name: grow_everything_database
+    container_name: tambua_shamba_database
     image: kartoza/postgis:12.0
     networks:
       - proxynet
@@ -14,9 +14,9 @@ services:
     restart: "on-failure"
 
   backend-server:
-    container_name: grow_everything_server
+    container_name: tambua_shamba_server
     build:
-      context: ./groweverythingserver
+      context: ./tambuashamba_server
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/backend-server
@@ -31,9 +31,9 @@ services:
       - database
   
   frontend-server:
-    container_name: grow_everything_client
+    container_name: tambua_shamba_client
     build: 
-      context: ./groweverythingclient
+      context: ./tambuashamba_client
     volumes:
       - .:/frontend-server
       - /frontend-server/node_modules
