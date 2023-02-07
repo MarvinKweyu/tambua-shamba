@@ -14,6 +14,10 @@
 
 ## Local Development
 
+Copy the environment variables from *.env.example* to *.env.dev*.
+```bash
+cp .env.example .env.dev
+```
 To run the project in development mode, run the below at the root:
 
 ```bash
@@ -21,6 +25,9 @@ docker-compose up
 ```
 
 Access the client application on: **[127.0.0.1:4200](127.0.0.1:4200)** and the server-side application on **[127.0.0.1:8000/api/v1/docs](127.0.0.1:8000/api/v1/docs)**
+
+Upload a file from the **test_files** directory to store and render farms onto the map
+
 
 **To clean up the system**:
 
