@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://res.cloudinary.com/dlxhllkxl/image/upload/v1675091828/tambua_shamba_pdzmu4.png" alt="masomo" width=250>
+  <img src="https://res.cloudinary.com/dlxhllkxl/image/upload/v1675804231/tambua_shamba_t0elez.png" alt="tambua shamba" width=250>
   <h1 align="center">Tambua Shamba</h1>
   <p align="center">A project to collect and preview soil organic carbon performance in farms across Kenya </p>
 </p>
