@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Farm } from '../models/farm.model';
+import { SourceFile } from '../models/sourceFile.model';
 import { FieldWorkService } from '../services/fieldwork.service';
 
 @Component({
@@ -9,15 +10,24 @@ import { FieldWorkService } from '../services/fieldwork.service';
   styleUrls: ['./farms.component.css']
 })
 export class FarmsComponent implements OnInit {
+  farmDetails: { count: number, next: string, previous: string, results: Farm[] } = { count: 4, next: "", previous: "", results: [] }
+  fileDetails: SourceFile = { id: 0, title: "", file_slug: "", csv_file: "", farm_count: 0, created_at: "", updated_at: "" };
 
-  farms: Farm[] = [{ id: 1, farm_name: "Lusaka farm", soil_organic_carbon: 3567, source_file: 2, created_at: "Wed, 01 Jan 2020 00:00:00 GMT", updated_at: "Wed, 01 Jan 2020 00:00:00 GMT" }]
 
   constructor(private router: Router, private route: ActivatedRoute, private feildWorkService: FieldWorkService) { }
   ngOnInit() {
-    console.log(this.route.snapshot.params['fileId'])
-    // this.route.params.subscribe((params: Params) => {
-    //   this.farms = this.feildWorkService.getFarmsOfSourceFile(params['fileId'])
-    // })
+
+    this.route.params.subscribe((params: Params) => {
+      this.feildWorkService.getFarmsOfSourceFile(params['fileId']).subscribe((response: any) => {
+
+        this.farmDetails = response
+      })
+
+      this.feildWorkService.getSourceFileById(+params['fileId']).subscribe((response: any) => {
+        this.fileDetails = response
+      })
+
+    })
   }
 
   searchFarms(searchTerm: string) {
@@ -26,8 +36,10 @@ export class FarmsComponent implements OnInit {
       // this.feildWorkService.searchFarmsByName(searchTerm).subscribe((res: { results: any[]; }) => { 
       //   if (res.count) > 1 { }
       // })
-      
+
     }
-    
+
   }
+
+
 }

@@ -1,4 +1,4 @@
-  <div class="d-flex justify-content-end">
+<div class="d-flex justify-content-end">
   <input
     type="text"
     class="form-control w-25 border-1 shadow-none"
@@ -8,8 +8,10 @@
   />
 </div>
 
-<h3 class="text-center">File Name</h3>
-<h3 class="text-center">Uploaded by Marcus on Thursday</h3>
+<h2 class="text-center">{{ fileDetails.title }}</h2>
+<p class="text-center">
+  Uploaded by John Doe on {{ fileDetails.created_at | date : "mediumDate" }}
+</p>
 
 <table class="table table-hover">
   <thead>
@@ -21,7 +23,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let farm of farms; let number = index">
+    <tr *ngFor="let farm of farmDetails.results; let number = index">
       <th scope="row">{{ number + 1 }}</th>
       <td>{{ farm.farm_name }}</td>
       <td>{{ farm.soil_organic_carbon }}</td>

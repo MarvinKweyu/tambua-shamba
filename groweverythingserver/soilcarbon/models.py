@@ -1,7 +1,6 @@
 from django.contrib.gis.db import models
 from django.core.validators import FileExtensionValidator
 from django.utils.text import slugify
-
 from soilcarbon.helpers.model_helpers import validate_is_csv
 
 

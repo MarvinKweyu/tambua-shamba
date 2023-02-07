@@ -14,11 +14,17 @@ export class FieldWorkService {
     return this.httpClient.get(environment.baseUrl + "soilcarbon/sources/")
   }
 
+
+  getSourceFileById(fileId: number): any {
+    return this.httpClient.get(environment.baseUrl + "soilcarbon/sources/" + fileId)
+  }
+
   /*
   Get all the farms related to a file
   */
-  getFarmsOfSourceFile(fileSlug: string): any {
-    return this.httpClient.get(environment.baseUrl + "soilcarbon/sources/file_slug?" + fileSlug)
+  getFarmsOfSourceFile(fileId: string): any {
+    // ?source_file__id = 1
+    return this.httpClient.get(environment.baseUrl + "soilcarbon/farms/?source_file__id=" + fileId)
   }
   /*
   Search for a farm by farm name
