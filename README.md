@@ -8,6 +8,8 @@
 
 >For an overview of what this product is about: [marvinkweyu/projects/tambua-shamba](https://www.marvinkweyu.net/projects/tambua_shamba)
 
+
+![Tambua shamba](./preview/tambua-shamba-dashboard.png)
 - [Local Development](#local-development)
 - [Production environment(WIP)](#production-environmentwip)
 - [Developer notes](#developer-notes)
