@@ -43,5 +43,12 @@ docker-compose down --volumes
 
 
 ## Project improvements
-- User authentication
-- Dynamic location setting
+- [ ] Add authentication for specific users to access the resources.
+
+- [ ] Intergration of asynchronous tasks. 
+  Use celery and rabbitMQ to update farms from the CSV asynchronously.
+- [ ] Download a file previously uploaded
+- [ ] Paginate the files listed
+- [ ] List and search for farms accepted under a specific file uploaded
+- [ ] Search for a file by title or filter by date
+- [ ] Search for a farm from the home page. The user should be able to zoom in on a farm with the name searched.

@@ -2,13 +2,11 @@
 
 > A project to collect and preview soil organic carbon performance in farms across Kenya 
 
-Preview SVG
 
 - [TambuaShamba - Client](#tambuashamba---client)
   - [Local setup](#local-setup)
     - [Manual](#manual)
     - [Docker](#docker)
-  - [Project Improvements](#project-improvements)
   - [Production ready(WIP)](#production-readywip)
 
 ## Local setup
@@ -45,14 +43,6 @@ docker run -d -p 4200:80 soilcarbonfrontend
 ```
 
 Navigate to `http://localhost:4200/`
-
-## Project Improvements
-
-- Download a file previously uploaded
-- Paginate the files listed
-- List and search for farms accepted under a specific file uploaded
-- Search for a file by title or filter by date
-- Search for a farm from the home page. The user should be able to zoom in on a farm with the name searched.
 
 ## Production ready(WIP)
 

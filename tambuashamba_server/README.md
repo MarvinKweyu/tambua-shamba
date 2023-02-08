@@ -1,16 +1,15 @@
-# Tambua Shamba
+# Tambua Shamba - Server
 
 > A project to collect and preview soil organic carbon performance in farms across Kenya 
 
 
 ## Table of Contents
-- [Tambua Shamba](#grow-everything)
+- [Tambua Shamba - Server](#tambua-shamba---server)
   - [Table of Contents](#table-of-contents)
-  - [Running TambuaShamba Locally](#running-groweverything-locally)
+  - [Running TambuaShamba Locally](#running-tambuashamba-locally)
     - [Manual Setup](#manual-setup)
     - [Docker Setup](#docker-setup)
   - [Production Day](#production-day)
-  - [Project path and improvements](#project-path-and-improvements)
 
 ## Running TambuaShamba Locally
 
@@ -58,9 +57,3 @@ The  following are the steps you might need to do to set this up on production:
 - Create a file `.env.prod` to contain production variables at the root of the project.
 - Generate a new secret key for production environments
 - Add the local environment variables to it while changing the allowed hosts, database details and any other information used on your production environment.
-
-## Project path and improvements
-- Add authentication for specific users to access the resources.
-
-- Intergration of asynchronous tasks. 
-  Use celery and rabbitMQ to update farms from the CSV asynchronously.
