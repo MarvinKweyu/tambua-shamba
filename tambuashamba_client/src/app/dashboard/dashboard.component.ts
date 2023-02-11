@@ -14,7 +14,7 @@ export class DashboardComponent {
 
   farms: Farm[] = [];
   bestFarms: Farm[] = [];
-  worstFarms: Farm[] = [];
+  worstFarms: Farm[] | undefined;
 
   constructor(
     public dialog: MatDialog,
@@ -46,16 +46,26 @@ get the top 3 and worst three farms
         return;
       })
 
-    this.dashboardService.getWorstFarms(3).pipe(map((res: { results: [] }) => {
+    this.dashboardService.getWorstFarms(3).pipe(map((res: { results: any }) => {
+
       // only add farms that are not already in the best farms list. This is in case the farm array has less than 6 farms
-      return res.results.filter((item: any) => { return this.farms.indexOf(item) == -1 });
+      const results = res.results.filter((item: any) => {
+        return this.bestFarms.indexOf(item) == -1;
+      });
+      res.results = results ? results : [];
+
+      return res;
 
 
     })).subscribe((res: any) => {
 
-      this.worstFarms = res.results ? res.results : [];
+      this.worstFarms = res.results;
+      // before a spread, check if the array is undefined else have it as empty array
+      // * note the definition on the worst farms variable
+      let worst: Farm[] = this.worstFarms || [];
+      this.farms = [...this.farms, ...worst]
 
-      this.farms = [...this.farms, ...this.worstFarms]
+
     },
 
       (error: any) => {
