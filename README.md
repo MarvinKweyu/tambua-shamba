@@ -18,9 +18,15 @@
 
 ## Local Development
 
-Copy the environment variables from *.env.example* to *.env.dev*.
+Copy the docker environment variables from *.env.example* to *.env.dev*.
 ```bash
 cp .env.example .env.dev
+```
+
+Copy project env variables 
+
+```bash
+cp .env.dev tambuashamba_server/tambuashamba/config/.env
 ```
 To run the project in development mode, run the below at the root:
 

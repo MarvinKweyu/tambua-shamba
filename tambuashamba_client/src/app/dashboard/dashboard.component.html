@@ -1,7 +1,4 @@
-<div
-  class="center-div"
-  *ngIf="worstFarms.length === 0 || bestFarms.length == 0; else showFarms"
->
+<div class="center-div" *ngIf="farms.length == 0; else showFarms">
   <div class="shadow p-3 bg-body-tertiary rounded">
     <h3 class="text-center">Tambua Shamba</h3>
     <p class="text-center">

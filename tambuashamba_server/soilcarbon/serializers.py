@@ -12,14 +12,15 @@ class SourceFileSerializer(serializers.ModelSerializer):
         model = SourceFile
         fields = (
             "id",
-            "title",
-            "file_slug",
+            # "title",
+            # "file_slug",
             "csv_file",
             "farm_count",
             "created_at",
             "updated_at",
         )
-        read_only_fields = ("farm_count", "title", "file_slug", ),
+        read_only_fields = ("farm_count", ),
+        # read_only_fields = ("farm_count", "title", "file_slug", ),
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

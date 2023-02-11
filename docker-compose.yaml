@@ -19,7 +19,7 @@ services:
       context: ./tambuashamba_server
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/backend-server
+      - .:/tambuashamba_server
     ports:
       - 8000:8000
     env_file:
